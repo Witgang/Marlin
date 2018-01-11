@@ -59,6 +59,9 @@
 #elif MB(RAMPS_14_EFB)
   #define IS_RAMPS_EFB
   #include "pins_RAMPS.h"
+#elif MB(RAMPS_14_BFE)         //added my own mod to use the former bed mosfet for the hot end instead since i'm using external mosfet for the bed.
+  #define IS_RAMPS_BFE           //also added required modifications to pins_RAMPS.h   
+  #include "pins_RAMPS.h"             
 #elif MB(RAMPS_14_EEB)
   #define IS_RAMPS_EEB
   #include "pins_RAMPS.h"
