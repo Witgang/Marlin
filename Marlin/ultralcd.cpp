@@ -797,6 +797,10 @@ void kill_screen(const char* lcd_msg) {
       clear_command_queue();
       quickstop_stepper();
       print_job_timer.stop();
+      // enqueue_and_echo_commands_P(PSTR("G0 Z20.9"));
+      //enqueue_and_echo_commands_P(PSTR("G28 X Y"));
+      enqueue_and_echo_commands_P(PSTR("G27 P2"));
+      enqueue_and_echo_commands_P(PSTR("G1 Y200"));
       thermalManager.disable_all_heaters();
       #if FAN_COUNT > 0
         for (uint8_t i = 0; i < FAN_COUNT; i++) fanSpeeds[i] = 0;

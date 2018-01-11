@@ -14082,7 +14082,13 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
       SERIAL_ERRORLNPGM(MSG_KILL_BUTTON);
       kill(PSTR(MSG_KILLED));
     }
-  #endif
+    // KILL KEY= RESET /
+if (!READ(KILL_PIN))
+{
+wdt_enable(WDTO_60MS);
+while(1) {}
+}
+#endif
 
   #if HAS_HOME
     // Check to see if we have to home, use poor man's debouncer

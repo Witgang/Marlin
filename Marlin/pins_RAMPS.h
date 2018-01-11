@@ -181,7 +181,7 @@
 //
 // Augmentation for auto-assigning RAMPS plugs
 //
-#if DISABLED(IS_RAMPS_EEB) && DISABLED(IS_RAMPS_EEF) && DISABLED(IS_RAMPS_EFB) && DISABLED(IS_RAMPS_EFF) && DISABLED(IS_RAMPS_SF) && !PIN_EXISTS(MOSFET_D)
+#if DISABLED(IS_RAMPS_EEB) && DISABLED(IS_RAMPS_EEF)&& DISABLED(IS_RAMPS_BFE) && DISABLED(IS_RAMPS_EFB) && DISABLED(IS_RAMPS_EFF) && DISABLED(IS_RAMPS_SF) && !PIN_EXISTS(MOSFET_D)    //also added here && DISABLED(IS_RAMPS_BFE)
   #if HOTENDS > 1
     #if TEMP_SENSOR_BED
       #define IS_RAMPS_EEB
@@ -211,14 +211,23 @@
   #define RAMPS_D10_PIN 10
 #endif
 
-#define HEATER_0_PIN     RAMPS_D10_PIN
+#ifndef HEATER_0_PIN
+#define HEATER_0_PIN     RAMPS_D10_PIN     // don't know why it was chosen to make this as default for all ramps boards i think users should be given                                           
+#endif                                              // the option to wire them as they please or atleast instructions on how to do what i did.
 
+                                                 
 #if ENABLED(IS_RAMPS_EFB)                      // Hotend, Fan, Bed
   #define FAN_PIN        RAMPS_D9_PIN
   #define HEATER_BED_PIN RAMPS_D8_PIN
 #elif ENABLED(IS_RAMPS_EEF)                    // Hotend, Hotend, Fan
   #define HEATER_1_PIN   RAMPS_D9_PIN
   #define FAN_PIN        RAMPS_D8_PIN
+  
+#elif ENABLED(IS_RAMPS_BFE)                    //Bed, Fan, Hotend     //my changes here//
+   #define HEATER_0_PIN  RAMPS_D8_PIN                                     //
+  #define HEATER_BED_PIN RAMPS_D10_PIN                                    //  
+  #define FAN_PIN        RAMPS_D9_PIN                                     //
+  
 #elif ENABLED(IS_RAMPS_EEB)                    // Hotend, Hotend, Bed
   #define HEATER_1_PIN   RAMPS_D9_PIN
   #define HEATER_BED_PIN RAMPS_D8_PIN
